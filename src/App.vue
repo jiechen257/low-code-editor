@@ -1,28 +1,60 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-view v-if="isRouterAlive"></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+  },
+  data() {
+    return {
+      isRouterAlive: true,
+    }
+  },
+  methods: {
+    // 刷新页面
+    reload() {
+      this.isRouterAlive = false
+      this.$nextTick(() => {
+        this.isRouterAlive = true
+      })
+    },
+  },
 }
 </script>
 
-<style>
+<style lang="less">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+// 页面切换动画
+.fade-enter-active {
+ transition: all 1.5s ease;
+}
+.fade-leave-active {
+  transition: all 1.5s ease;
+}
+.fade-enter {
+  transform: translateX(5px);
+  opacity: 0;
+}
+.fade-leave-to {
+  transform: translateX(5px);
+  opacity: 0;
+}
+.el-message-box.JSONView {
+  width: 1100px;
+}
+
+// 提示样式
+.Prompt{
+ font-size: 12px; color: #969799; margin-bottom: 10px
 }
 </style>
