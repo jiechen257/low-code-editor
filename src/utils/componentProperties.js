@@ -9,12 +9,12 @@ const componentProperties = new Map()
 // 数据版本  每次修改组件数据  需要对版本进行修改
 // componentProperties.set('componentPropertiesVersion', 'V1.0.0')
 
-componentProperties.set('captiontext', {
-  component: 'captiontext',
+componentProperties.set('CaptionText', {
+  component: 'CaptionText',
   text: '标题文字',
   type: '1-3',
   active: true,
-  style: 'captiontextsstyle',
+  style: 'CaptionTextsStyle',
   setStyle: {
     text: '标题文字',
     name: '标题文字',//标题内容

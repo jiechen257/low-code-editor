@@ -11,7 +11,7 @@
             class="componentList"
             draggable="true"
             @dragstart="dragStart($event)"
-            @dragend="dragEnd($even)"
+            @dragend="dragEnd($event)"
             :data-name="item.name"
             v-for="(item, ind) in items.comList"
             :key="ind"
@@ -40,7 +40,7 @@ const componentList = [
         text: '标题文本',
         type: '1-3',
         icon: 'icon-Component-biaotiwenzi',
-        name: 'captiontext',
+        name: 'CaptionText',
       },
 
       {
