@@ -38,6 +38,11 @@
           <!-- 主体内容 -->
           <section class="phone-container"></section>
 
+          <!-- 手机高度 -->
+          <div class="phone-size">iPhone 8手机高度</div>
+
+          <!-- 底部 -->
+          <PhoneBottom />
         </section>
       </div>
 
@@ -185,7 +190,7 @@ export default {
       position: relative;
 
       /* 手机高度 */
-      .phoneSize {
+      .phone-size {
         position: absolute;
         left: -137px;
         top: 640px;
