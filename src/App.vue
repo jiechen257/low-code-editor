@@ -8,7 +8,11 @@
 
 export default {
   name: 'App',
-  components: {
+  // 向子组件注入刷新功能
+  provide() {
+    return {
+      reload: this.reload
+    }
   },
   data() {
     return {
