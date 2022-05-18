@@ -55,18 +55,10 @@
 </template>
 
 <script>
-import PreviewPage from '@/components/previewPage'
-import SideBarAssembly from "@/components/sideBarAssembly";
-import HeaderTop from "@/components/headerTop";
 
 export default {
   name: 'home',
   inject: ['reload'],
-  components: {
-    PreviewPage,
-    SideBarAssembly,
-    HeaderTop
-  },
   data() {
     return {
       previewPage: {

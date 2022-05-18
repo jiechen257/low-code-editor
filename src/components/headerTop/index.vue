@@ -6,7 +6,7 @@
     }"
   >
     <!-- 左半部分 -->
-    <div class="lef-part" v-show="pageSetup.isBack">
+    <div class="left-part" v-show="pageSetup.isBack">
       <van-icon name="arrow-left"></van-icon>
     </div>
 
