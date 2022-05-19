@@ -4,6 +4,8 @@
 
 import Vue from 'vue'
 
+import '@/config/index'
+
 // 样式初始化
 import '@/assets/css/reset.css'
 import '@/assets/css/minx.less'
