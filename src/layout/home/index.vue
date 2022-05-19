@@ -87,7 +87,17 @@
       <section class="decorateTab"></section>
 
       <!-- 右侧组件属性和工具栏 -->
-      <div class="decorateAll"></div>
+      <div class="decorateAll">
+        <!-- 页面设置 -->
+        <transition name="decorateAnima">
+          <!-- 动态组件 -->
+          <component
+            :is="curRightToolsBar"
+            :datas="currentProperties"
+            @componenmanagement="manageComponent"
+          />
+        </transition>
+      </div>
 
     </section>
 
@@ -121,11 +131,11 @@ export default {
       currentCompIndex: '',            // 当前选中组件的index
       currentProperties: {}, // 当前组件的属性
 
-      curRightToolsBar: "componentStyle",
+      curRightToolsBar: "PageStyle",
       rightToolsBarOptions: {  // 右侧工具栏选项
         componentStyle: 'componentStyle',   // 组件属性
-        pageStyle: 'pageStyle',             // 页面属性
-        componentsManage: 'componentsManage'  // 组件管理
+        pageStyle: 'PageStyle',             // 页面属性
+        componentManage: 'ComponentManagement'  // 组件管理
       },
 
       delShow: true,  // 组件右侧的删除标签是否显示
@@ -138,7 +148,16 @@ export default {
       offsetY: 0, //记录上一次距离父元素高度
     }
   },
+  mounted() {
+    this.initPageData()
+  },
   methods: {
+    // 页面初始化
+    initPageData() {
+      this.pageSetup.name = '页面标题'
+      this.currentProperties = this.pageSetup
+    },
+
     // 页面标题栏切换
     headerTopHandler() {
 
@@ -328,12 +347,12 @@ export default {
       /* 切换组件 */
       this.rightToolsBarOptions = data.style
       /* 丢样式 */
-      this.currentproperties = data.setStyle
+      this.currentProperties = data.setStyle
 
       console.log(
           data,
           this.curRightToolsBar,
-          this.currentproperties,
+          this.currentProperties,
           '----------components data'
       )
     },
@@ -357,11 +376,12 @@ export default {
      * @param {Object} res 当前组件对象
      */
     activeComponent(res, index) {
+      console.log('选中当前组件', res)
       this.index = index
       /* 切换组件 */
-      this.rightcom = res.style
+      this.curRightToolsBar = res.style
       /* 丢样式 */
-      this.currentproperties = res.setStyle
+      this.currentProperties = res.setStyle
 
       /* 替换 */
       utils.forEach(this.pageComponents, (res) => {
@@ -379,8 +399,17 @@ export default {
      */
     deleteObj(index) {
       this.pageComponents.splice(index, 1)
-      if (this.index === index) this.rightcom = 'decorate'
+      if (this.index === index) this.curRightToolsBar = 'PageStyle'
       if (index < this.index) this.index = this.index - 1
+    },
+
+    /**
+     * 切换组件位置
+     *
+     * @param {Object} res 组件切换后返回的位置
+     */
+    manageComponent(res) {
+      this.pageComponents = res
     },
 
     // 页面刷新
