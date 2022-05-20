@@ -19,6 +19,7 @@ instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlenco
 
 // 跨域允许携带cookie
 instance.defaults.withCredentials = true
+// axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; // 判断是否为ajax请求
 
 // 请求拦截器
 instance.interceptors.request.use(

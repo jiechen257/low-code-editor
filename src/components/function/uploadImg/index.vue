@@ -5,10 +5,10 @@
       <img
           draggable="false"
           style="width: 640px; height: 400px; margin: 20px 0;"
-          :src="dialogImageUrl ? require('' + dialogImageUrl) : ''"
+          :src="dialogImageUrl"
           alt=""
       />
-      <!--                :src="`require(${dialogImageUrl} + '')`"-->
+<!--      :src="dialogImageUrl ? require('' + dialogImageUrl) : ''"-->
     </el-dialog>
 
     <!-- 图片放大 -->
@@ -27,7 +27,8 @@
       <el-upload
           v-if="dialogVisible"
           name="file"
-          :action="baseupload"
+          action=""
+          :http-request="httpRequestUpload"
           list-type="picture-card"
           :limit="1"
           :on-preview="preview"
@@ -53,6 +54,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: 'UploadImg',
   data() {
@@ -66,6 +68,19 @@ export default {
   },
   created() {},
   methods: {
+    httpRequestUpload(param) {
+      const formData = new FormData()
+      formData.append('files', param.file)
+      const uploadUrl = `${window.global_config.UPLOAD_URL}/upload`
+      axios.post(uploadUrl, formData).then(res => {
+        if (res?.status !== 200)
+          return this.$message.error('上传图片失败，请删除后重新上传')
+        this.dialogImageUrl = window.global_config.UPLOAD_URL + res.data[0].url
+        console.log('上传图片url', this.dialogImageUrl)
+      }).catch(err => {
+        console.error(err)
+      })
+    },
     /* 显示上传文件组件 */
     showUpload() {
       this.dialogVisible = true
@@ -106,11 +121,10 @@ export default {
     // 上传成功
     onSuccess(response) {
       // 返回错误
-      if (response.code !== 200)
-        return this.$message.error('上传图片失败，请删除后重新上传')
+      // if (response.code !== 200)
+      //   return this.$message.error('上传图片失败，请删除后重新上传')
 
-      // const imgUrlStr = 'back-end' + response.data.src
-      this.dialogImageUrl = '../../../../assets/bgImg/' + response.data.src
+      this.dialogImageUrl = window.global_config.UPLOAD_URL + response[0].url
       // this.dialogImageUrl = require('@/assets/bgImg/1652947082151.jpeg')
       console.log('上传图片url', this.dialogImageUrl)
     },
@@ -133,8 +147,8 @@ export default {
   computed: {
     // baseurl
     baseupload() {
-      return 'http://127.0.0.1:8090/upload/img'
-      // return `${window.global_config.BASE_URL}upload/miniShop`
+      // return 'http://127.0.0.1:8090/upload/img'
+      return `${window.global_config.UPLOAD_URL}/upload`
     },
 
     // 提交按钮是否可以点击
