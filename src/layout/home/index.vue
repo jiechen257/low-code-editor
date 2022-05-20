@@ -84,7 +84,29 @@
       </div>
 
       <!-- 手机页面右侧的修饰按钮 -->
-      <section class="decorateTab"></section>
+      <section class="decorateTab">
+        <span
+            :class="curRightToolsBar === 'PageStyle' ? 'active' : ''"
+            @click="curRightToolsBar = 'PageStyle'"
+        >
+          <i class="iconfont icon-wangye" />
+          页面设置
+        </span>
+        <span
+            :class="curRightToolsBar === 'ComponentManagement' ? 'active' : ''"
+            @click="curRightToolsBar = 'ComponentManagement'"
+        >
+          <i class="iconfont icon-zujian" />
+          组件管理
+        </span>
+<!--        <span-->
+<!--            class="active"-->
+<!--            v-show="curRightToolsBar !== 'ComponentManagement' && curRightToolsBar !== 'PageStyle'"-->
+<!--        >-->
+<!--          <i class="iconfont icon-zujian" />-->
+<!--          组件设置-->
+<!--        </span>-->
+      </section>
 
       <!-- 右侧组件属性和工具栏 -->
       <div class="decorateAll">
@@ -150,6 +172,27 @@ export default {
   },
   mounted() {
     this.initPageData()
+  },
+  watch: {
+    /* 监听右侧工具栏切换 */
+    curRightToolsBar(newVal) {
+      if (newVal === 'PageStyle') {
+        utils.forEach(this.pageComponents, (res) => {
+          /* 修改选中 */
+          if (res.active === true) res.active = false
+        })
+        this.currentProperties = this.pageSetup
+        return
+      }
+      if (newVal === 'ComponentManagement') {
+        /* 替换 */
+        utils.forEach(this.pageComponents, (res) => {
+          /* 修改选中 */
+          if (res.active === true) res.active = false
+        })
+        this.currentProperties = this.pageComponents
+      }
+    }
   },
   methods: {
     // 页面初始化
@@ -618,7 +661,7 @@ export default {
     position: fixed;
     display: flex;
     right: 380px;
-    top: 115px;
+    top: 70px;
     flex-direction: column;
     span {
       background-color: #fff;
