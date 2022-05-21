@@ -1,5 +1,5 @@
 <template>
-  <div class="componenManagement">
+  <div class="componentManagement">
     <!-- 标题 -->
     <h2>组件设置</h2>
     <p class="Prompt">底部导航组件为固定页面底部，无需拖拽调整位置</p>
@@ -55,7 +55,7 @@ export default {
     /* 删除组件 */
     onConfirms(res) {
       this.data.splice(res, 1)
-      this.$emit('componenmanagement', this.data)
+      this.$emit('manageComponent', this.data)
     },
   },
   watch: {
@@ -64,7 +64,7 @@ export default {
     },
 
     data(newVal) {
-      this.$emit('componenmanagement', newVal)
+      this.$emit('manageComponent', newVal)
     },
   },
   computed: {},
@@ -73,7 +73,7 @@ export default {
 
 <style scoped lang="less">
 /* 组件管理 */
-.componenManagement {
+.componentManagement {
   width: 100%;
   position: absolute;
   left: 0;

@@ -8,12 +8,12 @@
         >
         <el-button @click="previewPage.show = true">预览</el-button>
         <el-button @click="showJSON">查看JSON </el-button>
-        <el-button @click="$refs.uploadJSONFile.click()">导入JSON </el-button>
+        <el-button @click="$refs.uploadFileRef.click()">导入JSON </el-button>
         <el-button @click="exportJSON">导出JSON </el-button>
         <input
             type="file"
-            ref="uploadJSONFile"
-            id="JSONFile"
+            ref="uploadFileRef"
+            id="uploadFile"
             accept=".json"
             @change="importJSON"
             style="display: none"
@@ -116,7 +116,7 @@
           <component
             :is="curRightToolsBar"
             :datas="currentProperties"
-            @componenmanagement="manageComponent"
+            @manageComponent="manageComponent"
           />
         </transition>
       </div>
@@ -124,13 +124,22 @@
     </section>
 
     <!-- 预览页面 -->
-    <PreviewPage style="display: none"/>
+    <PreviewPage
+      :datas="previewPage"
+      :val="{
+        pageId,
+        name: pageSetup.name,
+        templateJson: JSON.stringify(pageSetup),
+        component: JSON.stringify(pageComponents),
+      }"
+    />
   </div>
 </template>
 
 <script>
 import utils from '@/utils/index' // 方法类
 import componentProperties from '@/utils/componentProperties' // 组件数据
+import FileSaver from 'file-saver' // 导出JSON
 
 export default {
   name: 'home',
@@ -215,7 +224,7 @@ export default {
       //阻止浏览器的默认事件
       event.preventDefault()
 
-      console.log('111')
+      // console.log('111')
       /* 获取鼠标高度 */
       let eventOffset = event.offsetY
 
@@ -346,7 +355,7 @@ export default {
           componentProperties.get(event.dataTransfer.getData('componentName'))
       )
 
-      console.log('222', data)
+      // console.log('222', data)
 
       /* 查询是否只能存在一个的组件且在第一个 */
       let someOne = this.pageComponents.some((item, index) => {
@@ -388,7 +397,7 @@ export default {
       })
 
       /* 切换组件 */
-      this.rightToolsBarOptions = data.style
+      this.curRightToolsBar = data.style
       /* 丢样式 */
       this.currentProperties = data.setStyle
 
@@ -406,7 +415,7 @@ export default {
      * @param {Object} event event对象
      */
     dragLeave() {
-      console.log('333')
+      // console.log('333')
       /* 删除提示组件 */
       this.pageComponents = this.pageComponents.filter(
           (res) => res.component !== 'OccupancyArea'
@@ -419,7 +428,7 @@ export default {
      * @param {Object} res 当前组件对象
      */
     activeComponent(res, index) {
-      console.log('选中当前组件', res)
+      // console.log('选中当前组件', res)
       this.index = index
       /* 切换组件 */
       this.curRightToolsBar = res.style
@@ -469,15 +478,55 @@ export default {
     },
     // 查看JSON数据
     showJSON() {
-      console.log('查看JSON数据')
+      this.$alert(
+          `{
+          <br/>
+          "id": ${this.id},
+          <br/>
+          "name": "${this.pageSetup.name}",
+          <br/>
+          "templateJson": '${JSON.stringify(this.pageSetup)}',
+          <br/>
+          "component": '${JSON.stringify(this.pageComponents)}',
+          <br/>
+        }`,
+          '查看JSON',
+          {
+            confirmButtonText: '确定',
+            customClass: 'JSONView',
+            dangerouslyUseHTMLString: true,
+            callback: () => {},
+          }
+      )
     },
     // 导入JSON数据
     importJSON() {
       console.log('导入JSON数据')
+      const file = document.getElementById('uploadFile').files[0]
+      const reader = new FileReader()
+      reader.readAsText(file)
+      let _this = this
+      reader.onload = function () {
+        // this.result为读取到的json字符串，需转成json对象
+        let ImportJSON = JSON.parse(this.result)
+        // 检测是否导入成功
+        console.log(ImportJSON, '-----------------导入成功')
+        // 导入JSON数据
+        _this.id = ImportJSON.id
+        _this.pageSetup = JSON.parse(ImportJSON.templateJson)
+        _this.pageComponents = JSON.parse(ImportJSON.component)
+      }
     },
     // 导出JSON数据
     exportJSON() {
-      console.log('导出JSON数据')
+      const data = JSON.stringify({
+        id: this.id,
+        name: this.pageSetup.name,
+        templateJson: JSON.stringify(this.pageSetup),
+        component: JSON.stringify(this.pageComponents),
+      })
+      const blob = new Blob([data], { type: '' })
+      FileSaver.saveAs(blob, `${this.pageSetup.name}.json`)
     }
   }
 }

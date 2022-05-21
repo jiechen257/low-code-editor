@@ -14,7 +14,7 @@ componentProperties.set('CaptionText', {
   text: '标题文字',
   type: '1-3',
   active: true,
-  style: 'CaptionTextsStyle',
+  style: 'CaptionTextStyle',
   setStyle: {
     text: '标题文字',
     name: '标题文字',//标题内容
