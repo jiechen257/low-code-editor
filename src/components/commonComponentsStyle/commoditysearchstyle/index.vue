@@ -10,18 +10,18 @@
 
     <!-- 表单 -->
     <el-form label-width="80px" :model="datas" size="small">
-      <div v-if="datas.hotords[0]">
-        <vuedraggable v-model="datas.hotords" v-bind="dragOptions">
+      <div v-if="datas.hotwords[0]">
+        <vuedraggable v-model="datas.hotwords" v-bind="dragOptions">
           <transition-group>
             <section
               class="imgList"
-              v-for="(item, index) in datas.hotords"
+              v-for="(item, index) in datas.hotwords"
               :key="item + index"
             >
-              <i class="el-icon-circle-close" @click="deleteHotords(index)" />
+              <i class="el-icon-circle-close" @click="deleteHotwords(index)" />
               <!-- 标题和链接 -->
               <div class="imgText">
-                <el-input v-model="item.text" placeholder="请输入热词" />
+                <el-input v-model="item.value" placeholder="请输入热词" />
               </div>
             </section>
           </transition-group>
@@ -29,7 +29,7 @@
       </div>
 
       <!-- 添加热词 -->
-      <el-button @click="addHotords" class="uploadImg" type="primary" plain
+      <el-button @click="addHotwords" class="uploadImg" type="primary" plain
         ><i class="el-icon-plus" />点击添加热词</el-button
       >
 
@@ -220,14 +220,14 @@ export default {
   },
   methods: {
     /* 添加热词 */
-    addHotords() {
-      this.datas.hotords.push({
-        text: '',
+    addHotwords() {
+      this.datas.hotwords.push({
+        value: '',
       })
     },
     /* 删除热词 */
-    deleteHotords(index) {
-      this.datas.hotords.splice(index, 1)
+    deleteHotwords(index) {
+      this.datas.hotwords.splice(index, 1)
     },
   },
 }

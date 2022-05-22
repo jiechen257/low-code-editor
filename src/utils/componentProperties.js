@@ -203,7 +203,8 @@ componentProperties.set('commoditysearch', {
     backgroundColor: 'rgb(249, 249, 249)', //背景颜色
     borderColor: 'rgb(255, 255, 255)', //框体颜色
     textColor: 'rgb(150, 151, 153)', //字体颜色
-    hotords: [], //热词
+    hotwords: [], //热词
+    selectedValue: ''
   },
 })
 componentProperties.set('storeinformation', {
