@@ -123,6 +123,13 @@ class utils {
     }
     return obj
   }
+  /**
+   * 链接跳转
+   */
+  linkToUrl(url) {
+    console.log('链接跳转:' + url)
+    window.open(url, '__blank')
+  }
 }
 
 export default new utils()

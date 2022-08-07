@@ -17,6 +17,7 @@
             :key="ind"
         >
           <i class="iconfont" :class="item.icon" v-if="item.icon"/>
+          <!-- <i :class="item.icon" v-if="item.icon"/> -->
           <van-icon :name="item.vanIcon" v-else/>
           <p>{{ item.text }}</p>
         </div>

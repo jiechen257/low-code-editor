@@ -24,6 +24,10 @@ import Vant from 'vant'
 import 'vant/lib/index.css'
 Vue.use(Vant)
 
+// 挂载全局链接跳转方法
+import Utils from './utils/index'
+Vue.prototype.$linkToUrl = Utils.linkToUrl
+
 // 组件自动化全局注册
 const requireComponent = require.context(
   // 其组件目录的相对路径

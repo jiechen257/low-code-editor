@@ -6,6 +6,7 @@ function resolve(dir) {
 module.exports = {
   publicPath: './',
   outputDir: 'JIE-editor',
+  assetsDir: 'static',
   productionSourceMap: false,
   chainWebpack: (config) => {
     config.resolve.alias

@@ -29,6 +29,7 @@
           :src="datas.imageList[index - 1].src"
           alt=""
           :style="{ padding: datas.imgMargin / 2 + 'px' }"
+          @click="$linkToUrl(datas.imageList[index - 1].http.externalLink)"
         />
       </div>
     </section>
@@ -250,6 +251,12 @@ export default {
       return true
     },
   },
+  methods: {
+    // linkToUrl(url) {
+    //   console.log('链接跳转', url)
+    //   window.open(url, '__blank')
+    // }
+  }
 }
 </script>
 

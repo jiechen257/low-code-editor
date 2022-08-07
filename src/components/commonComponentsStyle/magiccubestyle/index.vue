@@ -3,7 +3,7 @@
     <!-- 标题 -->
     <h2>{{ datas.text }}</h2>
 
-    <p style="color: #d40000; font-size: 14px">魔方布局</p>
+    <p style="color: #606266; font-size: 14px">魔方布局</p>
     <p style="color: #969799; font-size: 12px; margin: 5px 0">
       选定布局区域，在下方添加图片
     </p>
@@ -222,7 +222,7 @@
       </div>
     </section>
 
-    <p style="color: #d40000; font-size: 12px; margin-top: 10px">请添加图片</p>
+    <p style="color: #606266; font-size: 14px; margin-top: 10px">请添加图片</p>
 
     <!-- 表单 -->
     <el-form label-width="80px" :model="datas" size="small">
