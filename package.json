@@ -22,7 +22,7 @@
     "nprogress": "^0.2.0",
     "qrcode": "^1.4.4",
     "qs": "^6.9.1",
-    "tinymce": "^5.10.0",
+    "tinymce": "^5.10.9",
     "vant": "^2.12.30"
   },
   "devDependencies": {

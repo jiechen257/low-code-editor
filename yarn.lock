@@ -8542,10 +8542,10 @@ tiny-emitter@^2.0.0:
   resolved "https://registry.npmmirror.com/tiny-emitter/-/tiny-emitter-2.1.0.tgz#1d1a56edfc51c43e863cbb5382a72330e3555423"
   integrity sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==
 
-tinymce@^5.10.0:
-  version "5.10.4"
-  resolved "https://registry.npmmirror.com/tinymce/-/tinymce-5.10.4.tgz#24ee843c7648ade708605dec15d8dad07809f7db"
-  integrity sha512-L0ivAhGu7bEo6cUBrCzhtKlkIQqG2sTcL+uu7soMSxrECQIC5VwUnzp9HCEf+fRl36q6zavLV48lf8jelj+gXA==
+tinymce@^5.10.9:
+  version "5.10.9"
+  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-5.10.9.tgz#1dfacb3231c71a688d90ff44a0b3f2e91b3b9edf"
+  integrity sha512-5bkrors87X9LhYX2xq8GgPHrIgJYHl87YNs+kBcjQ5I3CiUgzo/vFcGvT3MZQ9QHsEeYMhYO6a5CLGGffR8hMg==
 
 tmp@^0.0.33:
   version "0.0.33"
